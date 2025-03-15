@@ -1,6 +1,21 @@
 const express = require("express");
 const app = express();
 const env = require("dotenv").config();
-
+const cors = require("cors");
+const authRouter = require("./src/router/authRouter");
+const orderRouter = require("./src/router/orderRouter");
+const menuRouter = require("./src/router/menuRouter");
+const reservationRouter = require("./src/router/reservationRouter");
+const reviewRouter = require("./src/router/reviewRouter");
+const adminRouter = require("./src/router/adminPannerRouter");
+app.use(cors());
+app.use("/api", authRouter);
+app.use("/api", orderRouter);
+app.use("/api", menuRouter);
+app.use("/api", reservationRouter);
+app.use("/api", reviewRouter);
+app.use("/api", adminRouter);
 const port = process.env.PORT_NO || 300;
-app.listen(port);
+app.listen(port, () => {
+  console.log(`Server is running on the port no ${port}`);
+});
